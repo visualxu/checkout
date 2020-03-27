@@ -4,14 +4,19 @@
 #include<stdio.h>
 #include<QDebug>
 #include<QTextCodec>
+#include"createtab2.h"
 #include"createdatabase.h"
+#include"to_execl.h"
 //#include<QTableWidgetItem>
+createtab2 tab2;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 //    std::cout<<"haha";
+    tab2.num = 15;//5条误差数据
+    tab2.ctab2(ui);
     ui->tableWidget->verticalHeader()->setHidden(true);//去掉自带的行号（相当反人类的自带）
     ui->tableWidget->horizontalHeader()->setHidden(true);//去掉自带的列号（同上）
     ui->tableWidget->setRowCount(4);//设置表格行数
@@ -37,12 +42,13 @@ MainWindow::MainWindow(QWidget *parent)
             if (item) {
                 item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);//居中
                 item->setBackground(QBrush(QColor(Qt::lightGray)));
-                item->setFlags(item->flags() & (~Qt::ItemIsEditable));
+                item->setFlags(item->flags() & (~Qt::ItemIsEditable));//不可修改
 //                ui->tableWidget->setItem(i,1,item);
-
             }
             else {
                 ui->tableWidget->setItem(i,j,new QTableWidgetItem());
+                QTableWidgetItem *item1 = ui->tableWidget_2->item(i,j);
+                //item1->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);//居中
             }
         }
     }
@@ -61,7 +67,7 @@ void MainWindow::on_pushButton_2_clicked()//保存数据
 {
 //    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
 //    QTextCodec::setCodecForLocale(codec);
-////    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+      // QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 //    createdata db;
     QSqlQuery query;
     QString unit = ui->comboBox->currentText().toUtf8();//单位
@@ -97,8 +103,6 @@ void MainWindow::on_pushButton_2_clicked()//保存数据
                   "证书编号,校准依据,校准地点,环境温度,相对湿度,校准日期,有效日期,校验员,核验员,外观和通电检查,绝缘电阻,有功分量和无功分量,备注)"
                   "values"
                   "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-//    query.prepare("insert into list(出厂编号,委托单位)values(?,?)");
-
     query.bindValue(0,id.toInt());
     qDebug()<<unit;
     query.bindValue(1,unit);
@@ -128,9 +132,13 @@ void MainWindow::on_pushButton_2_clicked()//保存数据
     query.bindValue(25,jielun3);
     query.bindValue(26,remark);
     query.exec();
+    tab2.id = id.toInt();
+    qDebug()<<tab2.id;
+    tab2.store(ui);
 }
 
 void MainWindow::on_pushButton_clicked()//打印报表
 {
-
+    to_execl toe;
+    toe.to_exec(ui);
 }

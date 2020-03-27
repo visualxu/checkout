@@ -1,5 +1,6 @@
 QT       += core gui
-    QT += sql widgets
+    QT += sql widgets　#使用sql
+    QT += xlsx #导出为excel
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,12 +19,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     createdatabase.cpp \
+    createtab2.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    to_execl.cpp
 
 HEADERS += \
     createdatabase.h \
-    mainwindow.h
+    createtab2.h \
+    mainwindow.h \
+    to_execl.h
 
 FORMS += \
     mainwindow.ui

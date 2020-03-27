@@ -9,6 +9,7 @@ QSqlQuery createdata::createbase() {
             fprintf(stderr,"open database failed !\n");
         }
         QSqlQuery query;
+        //基本信息表
         query.exec("create table list(出厂编号 int primary key,"
                    "委托单位 text,"
                    "地址 text,"
@@ -38,6 +39,22 @@ QSqlQuery createdata::createbase() {
                    "备注 text)CHARSET=utf8");
 //        query.exec("create table list(出厂编号 int primary key,"
 //                   "委托单位 text)CHARSET=utf8");
+        //校准信息表
+        query.exec("create table correct(序号 int primary key,"
+                   "设备编号 int,"
+                   "标称负荷VA float,"
+                   "功率因素 text,"
+                   "额定电压V int,"
+                   "校准点 int,"
+                   "有功分量标称值mS float,"
+                   "有功分量实际值mS float,"
+                   "`有功分量相对误差%` float,"
+                   "无功分量标称值mS float,"
+                   "无功分量实际值mS float,"
+                   "`无功分量相对误差%` float,"
+                   "CONSTRAINT linkkey FOREIGN KEY(设备编号) REFERENCES list(出厂编号) on delete cascade on update cascade)CHARSET=utf8");
+//建立外键：即一台设备对应多个误差信息
         return query;
 
 }
+
