@@ -1,5 +1,5 @@
 #include"createdatabase.h"
-QSqlQuery createdata::createbase() {
+void createdata::createbase() {
         QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
         db.setHostName("localhost");
         db.setDatabaseName("checkout");
@@ -54,7 +54,6 @@ QSqlQuery createdata::createbase() {
                    "`无功分量相对误差%` float,"
                    "CONSTRAINT linkkey FOREIGN KEY(设备编号) REFERENCES list(出厂编号) on delete cascade on update cascade)CHARSET=utf8");
 //建立外键：即一台设备对应多个误差信息
-        return query;
 
 }
 

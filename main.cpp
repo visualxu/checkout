@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
 //    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-    createdata db;
+    createdata db;//建库
     db.createbase();
     MainWindow w;
     w.show();

@@ -3,8 +3,8 @@
 #include <QSqlDatabase>
 #include<stdio.h>
 #include<QSqlQuery>
-#endif // CREATEDATABASE_H
 class createdata{
 public:
-    QSqlQuery createbase();
+    void createbase();
 };
+#endif // CREATEDATABASE_H

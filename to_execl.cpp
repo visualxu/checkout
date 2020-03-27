@@ -11,12 +11,12 @@ void to_execl::to_exec(Ui::MainWindow *ui)
     for (int i = 0;i < row;i++) {
         for (int j = 0;j < column;j++) {
             if (ui->tableWidget_2->item(i,j)) {
-                xlsx.write('A' + j + QString::number(i+1),ui->tableWidget_2->item(i,j)->text());
+                xlsx.write('A' + j + QString::number(i+1),ui->tableWidget_2->item(i,j)->text(),format);
 
             }
         }
     }
-    xlsx.mergeCells("A1:K1",format);
+    xlsx.mergeCells("A1:K1",format);//合并第一行第A~K列
     xlsx.mergeCells("A2:A3",format);
     xlsx.mergeCells("B2:B3",format);
     xlsx.mergeCells("C2:C3",format);

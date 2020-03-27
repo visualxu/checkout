@@ -7,8 +7,8 @@
 #include<QMainWindow>
 class createtab2 {
 public :
-    int num;
-    int id;
+    int num;//行数.误差数*3
+    int id;//出厂编号
     void ctab2(Ui::MainWindow *ui);
     void store(Ui::MainWindow *ui);
 };

@@ -57,7 +57,7 @@ void createtab2::ctab2(Ui::MainWindow *ui)
         //QString c = QString::number(i/3);
         //item->setText(c);
         item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);//居中
-        item->setFlags(item->flags() & (~Qt::ItemIsEditable));
+        item->setFlags(item->flags() & (~Qt::ItemIsEditable));//不可修改
     }
     for (int i = 3;i < num+3;i++) {
         for (int j = 0;j < 11;j++) {
@@ -65,6 +65,10 @@ void createtab2::ctab2(Ui::MainWindow *ui)
                 continue;
             }
             ui->tableWidget_2->setItem(i,j,new QTableWidgetItem("1"));
+            if (ui->tableWidget_2->item(i,j)) {
+                ui->tableWidget_2->item(i,j)->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);//居中
+                ui->tableWidget_2->item(i,j)->setFlags(ui->tableWidget_2->item(i,j)->flags()&(~Qt::ItemIsEditable));;//不可修改
+            }
         }
     }
 }
