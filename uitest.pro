@@ -1,5 +1,5 @@
 QT       += core gui
-    QT += sql widgets　#使用sql
+    QT += sql #使用sql
     QT += xlsx #导出为excel
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

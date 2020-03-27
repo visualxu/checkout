@@ -35,27 +35,14 @@ void createtab2::ctab2(Ui::MainWindow *ui)
         for (int j = 0;j < 11;j++) {
             QTableWidgetItem *item = ui->tableWidget_2->item(i,j);
             if (item) {
-                item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
-                item->setFlags(item->flags() & (~Qt::ItemIsEditable));
+                item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);//居中
+                item->setFlags(item->flags() & (~Qt::ItemIsEditable));//不可修改
             }
         }
     }
     ui->tableWidget_2->setStyleSheet("QTableWidget::item{border:1px solid ;}");//线条加粗
     int rowline = ui->tableWidget_2->rowCount();//误差数据
     ui->tableWidget_2->setRowCount(rowline + num);
-    for (int i = 3;i < num+3;i++) {
-        for (int j = 0;j < 11;j++) {
-            ui->tableWidget_2->setItem(i,j,new QTableWidgetItem());
-        }
-    }
-    for (int i = 3;i < num+3;i++) {
-        for (int j = 0;j < 11;j++) {
-            QTableWidgetItem *item = ui->tableWidget_2->item(i,j);
-            if (item) {
-                item->setText("1");
-            }
-        }
-    }
     for (int i = 3;i < num+3;i+=3) {
         ui->tableWidget_2->setSpan(i,0,3,1);
         ui->tableWidget_2->setSpan(i,1,3,1);
@@ -63,11 +50,22 @@ void createtab2::ctab2(Ui::MainWindow *ui)
         ui->tableWidget_2->setSpan(i,3,3,1);
         ui->tableWidget_2->setSpan(i,5,3,1);
         ui->tableWidget_2->setSpan(i,8,3,1);
-        QTableWidgetItem *item = ui->tableWidget_2->item(i,0);
         QString c = QString::number(i/3);
-        item->setText(c);
+        ui->tableWidget_2->setItem(i,0,new QTableWidgetItem(c));
+
+        QTableWidgetItem *item = ui->tableWidget_2->item(i,0);
+        //QString c = QString::number(i/3);
+        //item->setText(c);
         item->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter);//居中
         item->setFlags(item->flags() & (~Qt::ItemIsEditable));
+    }
+    for (int i = 3;i < num+3;i++) {
+        for (int j = 0;j < 11;j++) {
+            if (i%3 && (j <= 3 || j == 5 || j == 8)) {
+                continue;
+            }
+            ui->tableWidget_2->setItem(i,j,new QTableWidgetItem("1"));
+        }
     }
 }
 void createtab2::store(Ui::MainWindow *ui) {//保存数据数据

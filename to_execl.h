@@ -1,9 +1,10 @@
 #ifndef TO_EXECL_H
 #define TO_EXECL_H
 #include<QFileDialog>
-#include<QtXlsx/QtXlsx>
+#include<QtXlsx>
 #include<mainwindow.h>
 #include "ui_mainwindow.h"
+#include<QSqlQuery>
 class to_execl
 {
 public:
